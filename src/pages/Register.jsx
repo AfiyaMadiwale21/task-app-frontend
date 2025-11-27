@@ -3,11 +3,12 @@ import { useState } from "react";
 
 export default function Register() {
     const [form, setForm] = useState({ name: "", email: "", password: "" });
+    const API = "https://task-app-backend-y4pe.onrender.com";
 
     const handleRegister = async (e) => {
         e.preventDefault();
 
-        const res = await fetch("http://localhost:5000/auth/register", {
+        const res = await fetch(`${API}/auth/register`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(form),

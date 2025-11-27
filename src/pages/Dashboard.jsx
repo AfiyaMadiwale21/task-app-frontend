@@ -9,13 +9,14 @@ export default function Dashboard() {
         dueDate: "",
     });
     const [editId, setEditId] = useState(null);
+    const API = "https://task-app-backend-y4pe.onrender.com";
 
     const token = localStorage.getItem("token");
 
     // Fetch tasks
     const getTasks = async () => {
         try {
-            const res = await fetch("http://localhost:5000/tasks", {
+            const res = await fetch(`${API}/tasks`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
 
@@ -44,8 +45,8 @@ export default function Dashboard() {
         e.preventDefault();
 
         const url = editId
-            ? `http://localhost:5000/tasks/${editId}`
-            : `http://localhost:5000/tasks`;
+            ? `${API}/tasks/${editId}`
+            : `${API}/tasks`;
 
         const method = editId ? "PUT" : "POST";
 
@@ -64,7 +65,7 @@ export default function Dashboard() {
     };
 
     const deleteTask = async (id) => {
-        await fetch(`http://localhost:5000/tasks/${id}`, {
+        await fetch(`${API}/tasks/${id}`, {
             method: "DELETE",
             headers: { Authorization: `Bearer ${token}` },
         });
@@ -72,7 +73,7 @@ export default function Dashboard() {
     };
 
     const toggleDone = async (task) => {
-        await fetch(`http://localhost:5000/tasks/${task._id}`, {
+        await fetch(`${API}/tasks/${task._id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
